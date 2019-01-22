@@ -26,6 +26,7 @@
                         </div>
                         
                         <input type="submit" class="btn btn-primary" value="Se connecter">
+                        <a href="motDePasse-oublie.php">Mot de passe oublié ?</a>
                     </form>
                 </div>
                <div id="message"></div>

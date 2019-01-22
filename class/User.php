@@ -82,8 +82,7 @@ class User {
             $obj = $req->fetch();
             if(empty($obj)){
                 return null;
-            }else{
-                
+            }else{                
                 $user = new User();
                 $user->setId($obj->id);                    
                 $user->setPassword($obj->password);
@@ -110,6 +109,30 @@ class User {
             }else{
                return false;
             }
+        }catch(PDOException $e){
+            return "Votre requête a échoué, en voici la raison : ".$e->getMessage();
+        }
+    }
+
+    public function getUserByProfil(){
+        try {
+            $req = $this->connect->prepare("SELECT id, mail, id_profil FROM user WHERE id_profil = :profil");
+            $idProfil = $this->profil->getId();
+            $req->bindParam(":profil", $idProfil, PDO::PARAM_STR);
+            $req->execute();
+            $req->setFetchMode(PDO::FETCH_OBJ);
+            $lstUser = array();
+            while($obj = $req->fetch()){
+                $user = new User();
+                $user->setId($obj->id);         
+                $user->setMail($obj->mail);
+                $profil = new Profil();  
+                $user->setProfil($profil->getProfilById($obj->id_profil));
+                $lstUser[] = $user;
+            }
+            
+            return $lstUser;
+            
         }catch(PDOException $e){
             return "Votre requête a échoué, en voici la raison : ".$e->getMessage();
         }

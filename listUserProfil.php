@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Exercice sécurité code - Mon profil</title>
+    <title>Exercice sécurité code - Mon profil - liste utilisateurs</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
@@ -27,10 +27,29 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-6">
-                <h1>Profil de <?php echo $user->getMail() . " (".$user->getProfil()->getLibelle().")"; ?></h1>
-                <a href="listUserProfil.php" class='btn btn-primary'>Voir tous les "<?php echo $user->getProfil()->getLibelle() ?>"</a>
-                <a id="disconnect" class='btn btn-danger'>Déconnexion</a>
-                <div id="#message"></div>
+                <h1>Liste utilisateurs - profil <?php echo $user->getProfil()->getLibelle() ?></h1>
+                <a href="profilUser.php" class="btn btn-info btn-sm">Retour</a>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                
+                        $lstUserProfil = $user->getUserByProfil();
+                        foreach($lstUserProfil as $user){ ?>
+                            <tr>
+                                <td><?php echo $user->getMail(); ?></td>
+                            </tr>
+                        <?php }
+                
+                        ?>
+                        
+                    </tbody>
+                </table>
+                
             </div>
         </div>
     </div>
