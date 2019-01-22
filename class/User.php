@@ -22,13 +22,13 @@ class User {
             $req = $this->connect->prepare("INSERT INTO user (mail, password, id_profil) VALUES (:mail, :password, :profil)");
             
             $options = [
-                'cost' => 11,                                         
-                'salt' => random_bytes(22)
+                'cost' => 11               
             ];
             $password = password_hash($this->password, PASSWORD_BCRYPT, $options);        
             
             $req->bindParam(":mail", $this->mail, PDO::PARAM_STR);
             $req->bindParam(":password", $password, PDO::PARAM_STR);
+            $req->bindParam(":profil", $this->profil, PDO::PARAM_INT);
             $req->execute();
             $message = "Vous êtes bien inscrit !";
             return $message;

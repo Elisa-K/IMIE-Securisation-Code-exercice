@@ -32,6 +32,28 @@ class Profil {
         
     }
 
+    public function getAllProfil(){
+        try{
+            $req = $this->connect->prepare("SELECT id, libelle FROM profil");
+            $req->setFetchMode(PDO::FETCH_OBJ);
+            
+            $req->execute();
+
+            $tabProfil = array();
+            
+            while ($obj = $req->fetch()){
+                $profil = new Profil();
+                $profil->setId($obj->id);
+                $profil->setLibelle($obj->libelle);
+
+                $tabProfil[] = $profil;
+            }
+            return $tabProfil;
+        }catch(PDOException $e){
+            return "Erreur de récupération des profils : " .$e->getMessage();
+        }
+    }
+
     /**
      * Get the value of id
      */ 
