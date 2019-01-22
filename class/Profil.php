@@ -23,7 +23,7 @@ class Profil {
             $profil = new Profil();
             while ($obj = $req->fetch()){
                 $profil->setId($obj->id);
-                $profil->setRole($obj->libelle);
+                $profil->setLibelle($obj->libelle);
             }
             return $profil;
         }catch(PDOException $e){
