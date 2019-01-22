@@ -27,7 +27,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-6">
-                <h1>Profil de <?php echo $user->getMail() ?></h1>
+                <h1>Profil de <?php echo $user->getMail() . " (".$user->getProfil()->getLibelle().")"; ?></h1>
                 <a id="disconnect" class='btn btn-danger'>Déconnexion</a>
                 <div id="#message"></div>
             </div>
