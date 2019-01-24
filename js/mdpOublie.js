@@ -26,12 +26,12 @@ $(document).ready(function () {
 
             $.ajax({
                 type: "POST",
-                url: "./ajax/ajax-mdp-oublie.php",
+                url: "./ajax/ajax-mdpOublie.php",
                 data: {
-                    mail: $("#mail").val(),                    
+                    mail: $("#mail").val()                 
                 },
                 success: function (data) {
-                    
+                    $('#message').html(data);
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");

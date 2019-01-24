@@ -1,22 +1,23 @@
 $(document).ready(function () {
 
-    $("#signIn").validate({
+    $("#mdpReset").validate({
         rules: {
-            mail: {
-                required: true,
-                email: true
-            },
+          
             password: {
                 required: true,
                 minlength: 5
+            },
+            passwordConfirm: {
+                minlength: 5,
+                equalTo: "#password"
             }
         },
-        messages: {
-            mail: "Veuillez saisir un mail valide",
+        messages: {           
             password: {
                 required: "Veullez saisir un mot de passe",
                 minlength: "Le mot de passe doit contenir minimum 5 caractères"
-            }
+            },
+            passwordConfirm: "Le mot de passe n'est pas identique"            
         },
         errorElement: "div",
         errorClass: "invalid-feedback",
@@ -34,18 +35,21 @@ $(document).ready(function () {
 
             $.ajax({
                 type: "POST",
-                url: "./ajax/ajax-signin.php",
-                data: {
-                    mail: $("#mail").val(),
-                    password: $("#password").val()                   
+                url: "./ajax/ajax-mdpReset.php",
+                data: {                  
+                    password: $("#password").val(),
+                    userId: $("#uid").val()
                 },
                 success: function (data) {
-                    
-                    if(data.length == 0){                        
-                        window.location.replace('./profilUser.php');
+                    if(!data){
+                        $("#message").html(data);
                     }else{
-                        $('#message').html(data);
+                        window.location.replace("connexion.php");
                     }
+                   
+                   
+                   
+
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");

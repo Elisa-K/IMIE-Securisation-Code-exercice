@@ -22,7 +22,7 @@
                         </div>              
                         
                         <input type="submit" class="btn btn-primary" value="Valider">
-                       
+                    </form>
                 </div>
                <div id="message"></div>
             </div>
